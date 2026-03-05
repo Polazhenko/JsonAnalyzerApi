@@ -34,7 +34,7 @@ public class ControllerTests() : IAsyncLifetime
     [InlineData("Test2_valid2from3.json", MediaTypeNames.Application.Json)]
     public async Task AttachedFile_Success(string fileName, string contentType)
     {
-        var postUri = new Uri(_client!.BaseAddress!, File_Controller.RouteName);
+        var postUri = new Uri(_client!.BaseAddress!, FileController.RouteName);
         var parts = Environment.ProcessPath!.Split(["bin"], StringSplitOptions.None);
         var inputFilePath = Path.Combine(parts[0], $"TestData\\{fileName}");
         using var fileStream = File.OpenRead(inputFilePath);
@@ -58,7 +58,7 @@ public class ControllerTests() : IAsyncLifetime
     [InlineData("Test2_valid2from3.json")]
     public async Task JsonData_Success(string fileName)
     {
-        var postUri = new Uri(_client!.BaseAddress!, File_Controller.RouteName);
+        var postUri = new Uri(_client!.BaseAddress!, FileController.RouteName);
         var parts = Environment.ProcessPath!.Split(["bin"], StringSplitOptions.None);
         var inputFilePath = Path.Combine(parts[0], $"TestData\\{fileName}");
         var jsonString = File.ReadAllText(inputFilePath);

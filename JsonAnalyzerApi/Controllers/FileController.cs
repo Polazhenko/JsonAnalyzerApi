@@ -2,11 +2,12 @@ using JsonAnalyzerApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
+
 namespace JsonAnalyzerApi.Controllers;
 
 [ApiController]
-[Route(File_Controller.RouteName)]
-public class File_Controller() : ControllerBase
+[Route(FileController.RouteName)]
+public class FileController() : ControllerBase
 {
     private const string Multipart = "multipart/form-data";
     public const string RouteName = "CreateFile";
@@ -15,19 +16,26 @@ public class File_Controller() : ControllerBase
     [Consumes(MediaTypeNames.Application.Json, Multipart, MediaTypeNames.Application.Octet)]
     public async Task<IActionResult> Create_A_FileAsync()
     {
-        if (!TryGetContent(out var input))
+        try
         {
-            return BadRequest("Wrong input data (neither atached json file or json body message).");
-        }
+            if (!TryGetContent(out var input))
+            {
+                return BadRequest("Wrong input data (neither atached json file or json body message).");
+            }
 
-        var fileName = $"validObjects-{Guid.NewGuid()}.json";
-        var (result, error) = await Orchestrator.ExtractValidObjectsAsync(input, fileName);
-        if (result)
+            var fileName = $"validObjects-{Guid.NewGuid()}.json";
+            var (result, error) = await Orchestrator.ExtractValidObjectsAsync(input, fileName);
+            if (result)
+            {
+                return Ok($"Objects saved to {fileName}.");
+            }
+
+            return BadRequest(error);
+        }
+        catch (Exception ex)
         {
-            return Ok($"Objects saved to {fileName}.");
+            return BadRequest("Internal error: " + ex.Message);
         }
-
-        return BadRequest(error);
     }
 
     private bool TryGetContent(out Stream x)
