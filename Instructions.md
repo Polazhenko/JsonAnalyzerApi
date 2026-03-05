@@ -1,0 +1,3 @@
+- Read the README.md to understand what this service does.
+- Verify that it works as described in the README.md and if not, fix it.
+- You are free to change anything you like, as long as it does what it's supposed to do in a performant, safe and efficient way.

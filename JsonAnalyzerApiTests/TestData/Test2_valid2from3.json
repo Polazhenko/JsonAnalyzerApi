@@ -1,0 +1,17 @@
+[
+  {
+    "question": "What is the output of the following code snippet?",
+    "code": "int x = 5;\nint y = 10;\nConsole.WriteLine(x + y);",
+    "answer": "15"
+  },
+  {
+    "question": "What is the output of the following code snippet?",
+    "code: "string str1 = \"Hello\";\nstring str2 = \"World\";\nConsole.WriteLine(str1 + \" \" + str2);",
+    "answer": "Hello World"
+  },
+  {
+    "question": "What is the output of the following code snippet?",
+    "code": "int a = 10;\nint b = 20;\nConsole.WriteLine(a * b);",
+    "answer": "200"
+  }
+]
